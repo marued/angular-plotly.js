@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './fancyplot.component.html'
 })
 export class FancyplotComponent implements OnInit {
+    public i = 0;
 
     public graph = {
         data: [
@@ -18,6 +19,10 @@ export class FancyplotComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+    }
+
+    public showLog(a: any) {
+        console.log(this.i++, a);
     }
 
 }

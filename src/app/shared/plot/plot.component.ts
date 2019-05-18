@@ -93,8 +93,15 @@ export class PlotComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
         public keyValueDiffers: KeyValueDiffers,
     ) { }
 
+    public clickHandler = ($event?: MouseEvent) => {
+        $event.preventDefault();
+        $event.stopPropagation();
+    }
+
     ngOnInit() {
         this.createPlot().then(() => {
+            this.plotEl.nativeElement.addEventListener('click', this.clickHandler);
+
             const figure = this.createFigure();
             this.initialized.emit(figure);
         });
@@ -105,6 +112,8 @@ export class PlotComponent implements OnInit, OnChanges, OnDestroy, DoCheck {
             this.getWindow().removeEventListener('resize', this.resizeHandler as any);
             this.resizeHandler = undefined;
         }
+
+        this.plotEl.nativeElement.revemoEventListener('click', this.clickHandler);
 
         const figure = this.createFigure();
         this.purge.emit(figure);
